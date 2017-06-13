@@ -4,12 +4,9 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- TODO update title -->
-	<title></title>
+	<title>Getting Started w/ TypeScript</title>
 
-	<!-- TODO update description -->
-	<meta name="description" content="">
-	<!-- TODO update author -->
+	<meta name="description" content="Getting Started with TypeScript">
 	<meta name="author" content="Paul Shannon">
 
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -42,9 +39,9 @@
 <div class="reveal">
 	<!-- Any section element inside of this container is displayed as a slide -->
 	<div class="slides">
-		<!-- TODO title -->
 		<section>
-			<h2>TITLE</h2>
+			<h1>Getting Started</h1>
+			<img src="./images/typescript.png">
 		</section>
 
 		<section>
@@ -58,17 +55,331 @@
 				<div>
 					<ul>
 						<li>Sr Engineer @ SitePen</li>
-						<li>Co-maintainer of Intern</li>
-						<li>SitePen Podcast</li>
-						<li>Phoenix TypeScript</li>
+						<li><a href="https://theintern.github.io/intern/">Co-maintainer of Intern</a></li>
+						<li><a href="https://www.sitepen.com/blog/category/podcast/">SitePen Podcast</a></li>
+						<li><a href="https://www.meetup.com/Phoenix-TypeScript/">Phoenix TypeScript</a></li>
 						<li class="github no-style"><a href="https://github.com/devpaul">devpaul</a></li>
 						<li class="twitter no-style"><a href="https://twitter.com/developerPaul">@developerPaul</a></li>
 					</ul>
 				</div>
 			</div>
-			<aside class="notes">
-				TODO add images to intern, podcast, phxts, github, twitter
-			</aside>
+		</section>
+
+		<section>
+			<h2>Setting Up</h2>
+		</section>
+
+		<section>
+			<p>To get the most out of this event we recommend installing TypeScript</p>
+
+			<pre><code>npm install -g typescript</code></pre>
+
+			<br>
+
+			<p>Compile a TypeScript file with the command</p>
+
+			<pre><code>tsc &lt;filename&gt;</code></pre>
+		</section>
+
+		<section>
+			<h2>TypeScript Playground</h2>
+
+			<p><a href="https://www.typescriptlang.org/play/index.html">https://www.typescriptlang.org/</a></p>
+
+			<p>A side-by-side comparison of TypeScript and JavaScript code</p>
+		</section>
+
+		<section>
+			<h2>What is TypeScript?</h2>
+
+			<ul>
+				<li class="fragment">A typed superset of JavaScript</li>
+				<li class="fragment">A language transpiler</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Basic Types</h2>
+		</section>
+
+		<section>
+			<h3>Primitive Types</h3>
+
+			<ul>
+				<li>boolean</li>
+				<li>string</li>
+				<li>number</li>
+				<li>any</li>
+				<li>void</li>
+			</ul>
+		</section>
+
+		<section>
+			<pre><code class="typescript" data-trim data-noescape>
+				var yes: boolean = true;
+
+				var name: string = 'I am a string';
+
+				var value: number = 10;
+
+				var placeholder: any = 'I can be anything';
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>Non-Primitive Types</h3>
+			<ul>
+				<li>array</li>
+				<li>object</li>
+				<li>tuples</li>
+				<li>enum</li>
+				<li>function</li>
+				<li>class</li>
+			</ul>
+		</section>
+
+		<section>
+			<pre><code class="typescript" data-trim data-noescape>
+				var names: string[] = [ 'Paul', 'Dylan' ];
+
+				var values: Array&lt;number&gt; = [ 10, 20, 30 ];
+
+				var tuple: [ number, number, number ] = [ 10, 20, 30 ];
+
+				var obj: object = { src: 'url' };
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>Functions</h3>
+
+			<pre><code class="typescript" data-trim data-noescape>
+				const greeting = function (thing: string): void {
+					console.log(`Hello ${ thing }`);
+				}
+
+				function average(... values: number[]): number {
+					const sum = values.reduce((total, value) => total += value);
+					return sum / values.length;
+				}
+			</code></pre>
+		</section>
+
+		<section>
+			<h2>Interfaces</h2>
+		</section>
+
+		<section>
+			<p>Interfaces represent contracts.</p>
+
+			<p class="fragment">These contracts guarantee the shape an object and what it returns</p>
+		</section>
+
+		<section>
+			<h3>Generic Objects</h3>
+
+			<pre><code class="typescript" data-trim data-noescape>
+				interface Person {
+					firstName: string;
+					lastName?: string;
+					age: number;
+				}
+
+				const user: Person = {
+					firstName: 'Paul',
+					lastName: 'Shannon',
+					age: 38
+				};
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>Functional Objects</h3>
+
+			<pre><code class="typescript" data-trim data-noescape>
+				interface Convert {
+					(value: number): string
+					(value: number, digits: number): string;
+					(value: string): string;
+				}
+
+				const method: Convert = function (value: number | string, digits?: number) {
+					if (typeof value === 'string') {
+						return value;
+					}
+					else {
+						return value.toFixed(digits);
+					}
+				}
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>Generics</h3>
+
+			<pre><code class="typescript" data-trim data-noescape>
+				interface Bag<T> {
+					data: T;
+				}
+
+				const numberBag: Bag&lt;number&gt; = { data: 10 };
+				const stringBag: Bag&lt;string&gt; = { data: 'str' };
+			</code></pre>
+		</section>
+
+		<section>
+			<h2>Ambient Declarations</h2>
+		</section>
+
+		<section>
+			<p>All values are comprised of two components</p>
+
+			<p>A <b>declaration</b> that describes a variable (e.g. name and type)</p>
+
+			<p>A <b>definition</b> that concretely explains that symbol (i.e. code)</p>
+		</section>
+
+		<section>
+			<p>Ambient Declarations are <i>external</i>, <i>declaration-only</i> files that allow you to safely use existing
+				JavaScript libraries with TypeScript</p>
+		</section>
+
+		<section>
+			<h2>TypeScript Transpiler</h2>
+		</section>
+
+		<section>
+			<h3>Transpiles modern JavaScript</h3>
+
+			<ul>
+				<li>class</li>
+				<li>for..of</li>
+				<li>spread</li>
+				<li>destructuring</li>
+				<li>async..await</li>
+			</ul>
+		</section>
+
+		<section>
+			<h3>ES6 Class</h3>
+
+			<pre><code class="typescript" data-trim data-noescape>
+				class Person {
+					readonly name;
+					private birthdate: Date;
+
+					constructor(name: string, birthdate: Date) {
+						this.name = name;
+						this.birthdate = birthdate;
+					}
+
+					get age(): number {
+						return Date.now() - this.birthdate.getTime();
+					}
+				}
+
+				const p1 = new Person('Paul', new Date('03/20/1979'));
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>ES5 Constructor Function</h3>
+
+			<pre><code class="typescript" data-trim data-noescape>
+				var Person = (function () {
+					function Person(name, birthdate) {
+						this.name = name;
+						this.birthdate = birthdate;
+					}
+					Object.defineProperty(Person.prototype, "age", {
+						get: function () {
+							return Date.now() - this.birthdate.getTime();
+						},
+						enumerable: true,
+						configurable: true
+					});
+					return Person;
+				}());
+				var p1 = new Person('Paul', new Date('03/20/1979'));
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>Polyfills not included</h3>
+
+			<ul>
+				<li>Promise</li>
+				<li>Symbol</li>
+				<li>Proxy</li>
+				<li>Map</li>
+				<li>Set</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>TypeScript's Benefits</h2>
+		</section>
+
+		<section>
+			<p>Interfaces create clear intent</p>
+
+			<pre class="fragment"><code class="typescript" data-trim data-noescape>
+				function myFunction (): number {
+					const value = Math.random();
+
+					// Somewhere in a 1000 line function ...
+					if (value > 0.99) {
+						// This produces an error!
+						return 'gotcha!';
+					}
+					return value;
+				}
+			</code></pre>
+		</section>
+
+		<section>
+			<p>Code is easier to maintain</p>
+
+			<p class="fragment">because the TypeScript compiler will warn you of incompatible APIs</p>
+		</section>
+
+		<section>
+			<p>IDE integration</p>
+
+			<p class="fragment">makes writing to the interface easier and removes guesswork</p>
+		</section>
+
+		<section>
+			<p>Fewer mistakes</p>
+
+			<p class="fragment">means more time writing code and less time debugging</p>
+		</section>
+
+		<section>
+			<h3>Resource</h3>
+
+			<ul>
+				<li><a href="https://www.typescriptlang.org/docs/home.html">TypeScript Documentation</a></li>
+				<li><a href="https://www.typescriptlang.org/play/index.html">TypeScript Playground</a></li>
+				<li><a href="http://definitelytyped.org/">Definitely Typed</a></li>
+				<li><a href="https://github.com/Microsoft/TypeScript/wiki/Roadmap">TypeScript Roadmap</a></li>
+				<li><a href="https://www.typescriptlang.org/samples/index.html">Framework Samples</a></li>
+			</ul>
+		</section>
+
+		<section>
+			<h3>Tools</h3>
+
+			<ul>
+				<li><a href="https://angular.io/">Angular</a></li>
+				<li><a href="https://dojo.io">Dojo</a></li>
+				<li><a href="https://theintern.github.io/intern/">Intern Test Framework</a></li>
+				<li><a href="https://electron.atom.io/blog/2017/06/01/typescript">Electron</a></li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Questions?</h2>
 		</section>
 	</div>
 </div>
